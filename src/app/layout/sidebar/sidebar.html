@@ -1,0 +1,9 @@
+<nav aria-label="Navigation principale">
+  <!-- exact: true pour que "/" ne soit pas actif sur toutes les pages -->
+  <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+    >Dashboard</a
+  >
+  <a routerLink="/contacts" routerLinkActive="active">Contacts</a>
+  <a routerLink="/categories" routerLinkActive="active">Catégories</a>
+  <a routerLink="/favorites" routerLinkActive="active">Favoris</a>
+</nav>

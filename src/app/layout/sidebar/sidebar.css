@@ -1,0 +1,15 @@
+:host {
+  display: block;
+  width: 220px;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1rem;
+}
+
+.active {
+  font-weight: bold;
+}
