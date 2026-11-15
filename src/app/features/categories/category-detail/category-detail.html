@@ -1,1 +1,28 @@
-<p>category-detail works!</p>
+@if (category) {
+  <div class="page-header">
+    <h2>
+      <span class="dot" [style.background-color]="category.color"></span>
+      {{ category.name }}
+    </h2>
+    <a [routerLink]="['/categories', category.id, 'edit']">Modifier</a>
+  </div>
+
+  <p>Créée le {{ category.createdAt | date: 'dd/MM/yyyy' }}</p>
+
+  <h3>Contacts ({{ contacts().length }})</h3>
+  <ul>
+    @for (contact of contacts(); track contact.id) {
+      <li>
+        <a [routerLink]="['/contacts', contact.id]"
+          >{{ contact.firstName }} {{ contact.lastName }}</a
+        >
+      </li>
+    } @empty {
+      <li>Aucun contact dans cette catégorie.</li>
+    }
+  </ul>
+} @else {
+  <p>Catégorie introuvable.</p>
+}
+
+<a routerLink="/categories">Retour aux catégories</a>

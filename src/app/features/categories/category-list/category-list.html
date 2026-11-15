@@ -3,12 +3,17 @@
   <a routerLink="/categories/new">Nouvelle catégorie</a>
 </div>
 
+@if (errorMessage(); as message) {
+  <p class="error" role="alert">{{ message }}</p>
+}
+
 <ul class="list">
   @for (category of categories(); track category.id) {
     <li>
       <span class="dot" [style.background-color]="category.color"></span>
       <a [routerLink]="['/categories', category.id]">{{ category.name }}</a>
       <a [routerLink]="['/categories', category.id, 'edit']">Modifier</a>
+      <button type="button" (click)="remove(category)">Supprimer</button>
     </li>
   } @empty {
     <li>Aucune catégorie pour l'instant.</li>
