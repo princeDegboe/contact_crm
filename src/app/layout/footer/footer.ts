@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  imports: [],
   selector: 'app-footer',
-  styleUrl: './footer.css',
   templateUrl: './footer.html',
+  styleUrl: './footer.css',
 })
-export class Footer {}
+export class Footer {
+  // Année affichée dans le template
+  readonly year = new Date().getFullYear();
+}

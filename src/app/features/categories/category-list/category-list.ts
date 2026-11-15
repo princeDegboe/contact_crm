@@ -1,9 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { CategoryService } from '../../../core/services/category.service';
 
 @Component({
-  imports: [],
   selector: 'app-category-list',
-  styleUrl: './category-list.css',
+  imports: [RouterLink],
   templateUrl: './category-list.html',
+  styleUrl: './category-list.css',
 })
-export class CategoryList {}
+export class CategoryList {
+  private readonly categoryService = inject(CategoryService);
+
+  // Signal en lecture seule du service, lu dans le template avec categories()
+  readonly categories = this.categoryService.categories;
+}
