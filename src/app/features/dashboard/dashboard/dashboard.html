@@ -1,1 +1,49 @@
-<p>dashboard works!</p>
+<h2>Tableau de bord</h2>
+
+<section class="stats">
+  <a class="stat" routerLink="/contacts">
+    <span class="value">{{ totalContacts() }}</span>
+    <span class="label">Contacts</span>
+  </a>
+  <a class="stat" routerLink="/favorites">
+    <span class="value">{{ totalFavorites() }}</span>
+    <span class="label">Favoris</span>
+  </a>
+  <a class="stat" routerLink="/categories">
+    <span class="value">{{ totalCategories() }}</span>
+    <span class="label">Catégories</span>
+  </a>
+</section>
+
+<div class="columns">
+  <section>
+    <h3>Derniers ajouts</h3>
+    <ul class="list">
+      @for (contact of latestContacts(); track contact.id) {
+        <li>
+          <a [routerLink]="['/contacts', contact.id]"
+            >{{ contact.firstName }} {{ contact.lastName }}</a
+          >
+          <span class="muted">{{ contact.createdAt | date: 'dd/MM/yyyy' }}</span>
+        </li>
+      } @empty {
+        <li>Aucun contact. <a routerLink="/contacts/new">Ajouter un contact</a></li>
+      }
+    </ul>
+  </section>
+
+  <section>
+    <h3>Contacts par catégorie</h3>
+    <ul class="list">
+      @for (stat of categoryStats(); track stat.category.id) {
+        <li>
+          <span class="dot" [style.background-color]="stat.category.color"></span>
+          <a [routerLink]="['/categories', stat.category.id]">{{ stat.category.name }}</a>
+          <span class="muted">{{ stat.count }}</span>
+        </li>
+      } @empty {
+        <li>Aucune catégorie. <a routerLink="/categories/new">Créer une catégorie</a></li>
+      }
+    </ul>
+  </section>
+</div>

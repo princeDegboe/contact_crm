@@ -1,1 +1,66 @@
-<p>contact-list works!</p>
+<div class="page-header">
+  <h2>Contacts ({{ filteredContacts().length }})</h2>
+  <a routerLink="/contacts/new">Nouveau contact</a>
+</div>
+
+<div class="filters">
+  <div class="field">
+    <label for="search">Recherche</label>
+    <input
+      #searchInput
+      id="search"
+      type="search"
+      placeholder="Nom ou prénom"
+      [value]="search()"
+      (input)="search.set(searchInput.value)"
+    />
+  </div>
+
+  <div class="field">
+    <label for="category">Catégorie</label>
+    <select #categorySelect id="category" (change)="categoryId.set(categorySelect.value)">
+      <option value="">Toutes</option>
+      @for (category of categories(); track category.id) {
+        <option [value]="category.id">{{ category.name }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="field">
+    <label for="sort">Tri</label>
+    <select #sortSelect id="sort" (change)="onSortChange(sortSelect.value)">
+      <option value="name-asc">Nom (A → Z)</option>
+      <option value="name-desc">Nom (Z → A)</option>
+      <option value="date-desc">Plus récents</option>
+      <option value="date-asc">Plus anciens</option>
+    </select>
+  </div>
+
+  <div class="checkbox">
+    <input
+      #favCheckbox
+      id="favorites-only"
+      type="checkbox"
+      (change)="favoritesOnly.set(favCheckbox.checked)"
+    />
+    <label for="favorites-only">Favoris uniquement</label>
+  </div>
+</div>
+
+@if (errorMessage(); as message) {
+  <p class="error" role="alert">{{ message }}</p>
+}
+
+<ul class="cards">
+  @for (contact of filteredContacts(); track contact.id) {
+    <li>
+      <app-contact-card
+        [contact]="contact"
+        (favoriteToggled)="toggleFavorite($event)"
+        (deleteRequested)="remove($event)"
+      />
+    </li>
+  } @empty {
+    <li>Aucun contact trouvé.</li>
+  }
+</ul>

@@ -1,0 +1,54 @@
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.star {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.infos {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.5rem 1.5rem;
+}
+
+.infos dt {
+  font-weight: bold;
+}
+
+.infos dd {
+  margin: 0;
+}
+
+/* Garde les retours à la ligne saisis dans les notes */
+.notes {
+  white-space: pre-wrap;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.error {
+  color: #dc2626;
+}

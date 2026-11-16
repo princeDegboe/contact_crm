@@ -1,0 +1,40 @@
+<!-- @let : variable locale du template, évite de réécrire contact() partout -->
+@let current = contact();
+
+<article class="card">
+  <div class="card-header">
+    <h3>
+      <a [routerLink]="['/contacts', current.id]">{{ current.firstName }} {{ current.lastName }}</a>
+    </h3>
+    <button
+      type="button"
+      class="star"
+      (click)="favoriteToggled.emit(current)"
+      [attr.aria-pressed]="current.favorite"
+      [attr.aria-label]="current.favorite ? 'Retirer des favoris' : 'Ajouter aux favoris'"
+    >
+      {{ current.favorite ? '★' : '☆' }}
+    </button>
+  </div>
+
+  <p class="muted">{{ current.email }}</p>
+  @if (current.jobTitle) {
+    <p class="muted">{{ current.jobTitle }}</p>
+  }
+  @if (current.company) {
+    <p class="muted">{{ current.company }}</p>
+  }
+
+  @if (category(); as cat) {
+    <span class="badge">
+      <span class="dot" [style.background-color]="cat.color"></span>
+      {{ cat.name }}
+    </span>
+  }
+
+  <div class="actions">
+    <a [routerLink]="['/contacts', current.id]">Voir</a>
+    <a [routerLink]="['/contacts', current.id, 'edit']">Modifier</a>
+    <button type="button" (click)="deleteRequested.emit(current)">Supprimer</button>
+  </div>
+</article>

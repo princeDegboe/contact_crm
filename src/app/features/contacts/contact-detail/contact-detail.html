@@ -1,1 +1,65 @@
-<p>contact-detail works!</p>
+@if (contact(); as current) {
+  <div class="page-header">
+    <h2>{{ current.firstName }} {{ current.lastName }}</h2>
+    <button
+      type="button"
+      class="star"
+      (click)="toggleFavorite()"
+      [attr.aria-pressed]="current.favorite"
+      [attr.aria-label]="current.favorite ? 'Retirer des favoris' : 'Ajouter aux favoris'"
+    >
+      {{ current.favorite ? '★' : '☆' }}
+    </button>
+  </div>
+
+  @if (category(); as cat) {
+    <span class="badge">
+      <span class="dot" [style.background-color]="cat.color"></span>
+      {{ cat.name }}
+    </span>
+  }
+
+  <dl class="infos">
+    <dt>Email</dt>
+    <dd>
+      <a [href]="'mailto:' + current.email">{{ current.email }}</a>
+    </dd>
+
+    @if (current.phone) {
+      <dt>Téléphone</dt>
+      <dd>
+        <a [href]="'tel:' + current.phone">{{ current.phone }}</a>
+      </dd>
+    }
+    @if (current.company) {
+      <dt>Entreprise</dt>
+      <dd>{{ current.company }}</dd>
+    }
+    @if (current.jobTitle) {
+      <dt>Poste</dt>
+      <dd>{{ current.jobTitle }}</dd>
+    }
+    @if (current.notes) {
+      <dt>Notes</dt>
+      <dd class="notes">{{ current.notes }}</dd>
+    }
+
+    <dt>Créé le</dt>
+    <dd>{{ current.createdAt | date: 'dd/MM/yyyy HH:mm' }}</dd>
+    <dt>Modifié le</dt>
+    <dd>{{ current.updatedAt | date: 'dd/MM/yyyy HH:mm' }}</dd>
+  </dl>
+
+  @if (errorMessage(); as message) {
+    <p class="error" role="alert">{{ message }}</p>
+  }
+
+  <div class="actions">
+    <a [routerLink]="['/contacts', current.id, 'edit']">Modifier</a>
+    <button type="button" (click)="remove()">Supprimer</button>
+  </div>
+} @else {
+  <p>Contact introuvable.</p>
+}
+
+<p><a routerLink="/contacts">Retour aux contacts</a></p>
