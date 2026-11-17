@@ -1,45 +1,89 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
 .card {
-  border: 1px solid #d4d4d8;
-  border-radius: 8px;
-  padding: 1rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  height: 100%;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+
+.card:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 12px rgb(16 24 40 / 12%);
 }
 
 .card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 0.5rem;
 }
 
 .card h3 {
   margin: 0;
+  font-size: 1.05rem;
+}
+
+.card h3 a {
+  color: var(--color-text);
+}
+
+/* Le lien du nom s'étire sur toute la carte : un clic n'importe où ouvre le détail.
+   Pas de lien imbriqué, donc ça reste valide en HTML et accessible au clavier. */
+.card h3 a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.card h3 a:hover {
+  text-decoration: none;
+}
+
+/* Le contour de focus clavier entoure toute la carte */
+.card h3 a:focus-visible {
+  outline: none;
+}
+
+.card h3 a:focus-visible::after {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* L'étoile et les boutons passent au-dessus du lien étiré pour garder leur propre action */
+.star,
+.actions {
+  position: relative;
+  z-index: 1;
 }
 
 .muted {
-  color: #6b7280;
-  margin: 0.25rem 0;
+  margin: 0;
+  font-size: 0.9rem;
 }
 
 .badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
+  margin-top: 0.35rem;
 }
 
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-}
-
-.star {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1.25rem;
-}
-
+/* Les actions restent en bas, même si les cartes n'ont pas la même hauteur */
 .actions {
   display: flex;
-  gap: 0.75rem;
-  margin-top: 0.75rem;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 0.85rem;
+}
+
+.actions .btn,
+.actions button {
+  padding: 0.3rem 0.7rem;
+  font-size: 0.85rem;
 }

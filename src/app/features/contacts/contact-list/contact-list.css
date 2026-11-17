@@ -1,37 +1,24 @@
-.page-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .filters {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   align-items: flex-end;
-  margin: 1rem 0;
+  margin-bottom: 1.25rem;
 }
 
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+.filters .field {
+  flex: 1 1 160px;
 }
 
-.checkbox {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+.filters .search {
+  flex: 2 1 240px;
 }
 
-.cards {
-  list-style: none;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 1rem;
+/* Aligne la case à cocher sur le bas des champs */
+.filters .checkbox {
+  padding-bottom: 0.6rem;
 }
 
-.error {
-  color: #dc2626;
+.empty {
+  grid-column: 1 / -1;
 }

@@ -1,22 +1,22 @@
 <h2>Tableau de bord</h2>
 
 <section class="stats">
-  <a class="stat" routerLink="/contacts">
+  <a class="card stat" routerLink="/contacts">
     <span class="value">{{ totalContacts() }}</span>
     <span class="label">Contacts</span>
   </a>
-  <a class="stat" routerLink="/favorites">
+  <a class="card stat" routerLink="/favorites">
     <span class="value">{{ totalFavorites() }}</span>
     <span class="label">Favoris</span>
   </a>
-  <a class="stat" routerLink="/categories">
+  <a class="card stat" routerLink="/categories">
     <span class="value">{{ totalCategories() }}</span>
     <span class="label">Catégories</span>
   </a>
 </section>
 
 <div class="columns">
-  <section>
+  <section class="card">
     <h3>Derniers ajouts</h3>
     <ul class="list">
       @for (contact of latestContacts(); track contact.id) {
@@ -32,7 +32,7 @@
     </ul>
   </section>
 
-  <section>
+  <section class="card">
     <h3>Contacts par catégorie</h3>
     <ul class="list">
       @for (stat of categoryStats(); track stat.category.id) {

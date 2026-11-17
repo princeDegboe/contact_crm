@@ -1,10 +1,10 @@
 <div class="page-header">
   <h2>Contacts ({{ filteredContacts().length }})</h2>
-  <a routerLink="/contacts/new">Nouveau contact</a>
+  <a routerLink="/contacts/new" class="btn btn-primary">Nouveau contact</a>
 </div>
 
-<div class="filters">
-  <div class="field">
+<div class="card filters">
+  <div class="field search">
     <label for="search">Recherche</label>
     <input
       #searchInput
@@ -48,7 +48,7 @@
 </div>
 
 @if (errorMessage(); as message) {
-  <p class="error" role="alert">{{ message }}</p>
+  <p class="alert" role="alert">{{ message }}</p>
 }
 
 <ul class="cards">
@@ -61,6 +61,6 @@
       />
     </li>
   } @empty {
-    <li>Aucun contact trouvé.</li>
+    <li class="card empty">Aucun contact trouvé.</li>
   }
 </ul>

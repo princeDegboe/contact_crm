@@ -1,1 +1,369 @@
-/* You can add global styles to this file, and also import other style files */
+/* ===== Variables : thème clair par défaut ===== */
+:root {
+  color-scheme: light;
+  --color-bg: #f6f7fb;
+  --color-surface: #ffffff;
+  --color-border: #e4e6ee;
+  --color-text: #1f2430;
+  --color-muted: #6b7280;
+  --color-primary: #4f46e5;
+  --color-primary-hover: #4338ca;
+  --color-primary-soft: #eef0ff;
+  --color-on-primary: #ffffff;
+  --color-danger: #dc2626;
+  --color-danger-soft: #fef2f2;
+  --color-star: #f59e0b;
+
+  --radius: 10px;
+  --shadow: 0 1px 2px rgb(16 24 40 / 6%), 0 1px 3px rgb(16 24 40 / 10%);
+  --font: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ===== Thème sombre (activé plus tard via data-theme="dark" sur <html>) ===== */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --color-bg: #0f1220;
+  --color-surface: #171b2d;
+  --color-border: #2a3047;
+  --color-text: #e7e9f3;
+  --color-muted: #9aa3b8;
+  --color-primary: #818cf8;
+  --color-primary-hover: #a5b4fc;
+  --color-primary-soft: #23284a;
+  --color-on-primary: #0f1220;
+  --color-danger: #f87171;
+  --color-danger-soft: #3b1f25;
+  --color-star: #fbbf24;
+  --shadow: 0 1px 2px rgb(0 0 0 / 40%);
+}
+
+/* ===== Base ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 0.5rem;
+  line-height: 1.25;
+}
+
+h2 {
+  font-size: 1.6rem;
+}
+
+h3 {
+  font-size: 1.1rem;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Contour visible au clavier (accessibilité) */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ===== Formulaires ===== */
+label {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 0.55rem 0.75rem;
+}
+
+input[type='color'] {
+  width: 4rem;
+  height: 2.5rem;
+  padding: 0.2rem;
+}
+
+input[type='checkbox'] {
+  width: 1rem;
+  height: 1rem;
+  padding: 0;
+  accent-color: var(--color-primary);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.error {
+  color: var(--color-danger);
+  margin: 0;
+}
+
+/* ===== Boutons ===== */
+button,
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.5rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  text-decoration: none;
+  transition: background-color 0.15s;
+}
+
+button:hover,
+.btn:hover {
+  background: var(--color-primary-soft);
+  text-decoration: none;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Le bouton d'envoi d'un formulaire est le bouton principal */
+.btn-primary,
+button[type='submit'] {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.btn-primary:hover,
+button[type='submit']:hover {
+  background: var(--color-primary-hover);
+}
+
+.btn-danger {
+  color: var(--color-danger);
+  border-color: var(--color-danger);
+}
+
+.btn-danger:hover {
+  background: var(--color-danger-soft);
+}
+
+/* ===== Éléments communs aux pages ===== */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.page-header h2 {
+  margin: 0;
+}
+
+.muted {
+  color: var(--color-muted);
+}
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1rem;
+}
+
+.cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+button:disabled:hover {
+  background: var(--color-surface);
+}
+
+/* Bouton principal désactivé : garde sa couleur au survol */
+button[type='submit']:disabled:hover,
+.btn-primary:disabled:hover {
+  background: var(--color-primary);
+}
+
+/* ===== Formulaires de création / édition ===== */
+.form {
+  max-width: 640px;
+  padding: 1.5rem;
+}
+
+/* Grille 2 colonnes, repasse en 1 colonne sur mobile */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 1.25rem;
+}
+
+.form-grid .field-full {
+  grid-column: 1 / -1;
+}
+
+.form .field + .field {
+  margin-top: 1rem;
+}
+
+.form-grid .field + .field {
+  margin-top: 0;
+}
+
+.form textarea {
+  resize: vertical;
+}
+
+.form .checkbox {
+  margin-top: 1rem;
+}
+
+/* Champ invalide après interaction */
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border-color: var(--color-danger);
+}
+
+.field .error {
+  font-size: 0.85rem;
+}
+
+.form > .error {
+  margin-top: 1rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+}
+
+/* Encadré d'alerte */
+.alert {
+  max-width: 640px;
+  margin: 0 0 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-danger);
+  border-radius: var(--radius);
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+}
+
+@media (max-width: 600px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form {
+    padding: 1rem;
+  }
+}
+
+/* ===== Petits éléments partagés ===== */
+.page-header {
+  flex-wrap: wrap;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  align-self: flex-start;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  background: var(--color-primary-soft);
+  color: var(--color-text);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* Bouton étoile (favori) */
+.star {
+  padding: 0.1rem 0.35rem;
+  border: none;
+  background: none;
+  font-size: 1.3rem;
+  line-height: 1;
+  color: var(--color-star);
+}
+
+.back {
+  display: inline-block;
+  margin-top: 1.25rem;
+}
+
+/* Liste avec séparateurs */
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.list li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.list li:last-child {
+  border-bottom: none;
+}
+
+.empty {
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--color-muted);
+}

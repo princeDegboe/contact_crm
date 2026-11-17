@@ -45,7 +45,7 @@ Prerequisites: Node.js 22 or later and npm.
 
 ```bash
 git clone <repository-url>
-cd contact-crm
+cd <repository-folder>/IDV-ANGU/day03/contact-crm
 npm install
 ```
 

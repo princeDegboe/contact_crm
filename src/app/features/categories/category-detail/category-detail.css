@@ -1,12 +1,16 @@
-.page-header {
+.title {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 0.6rem;
 }
 
-.dot {
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
+.title .dot {
+  width: 14px;
+  height: 14px;
+}
+
+.email {
+  margin-left: auto;
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
 }

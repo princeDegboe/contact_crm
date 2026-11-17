@@ -33,8 +33,10 @@
   }
 
   <div class="actions">
-    <a [routerLink]="['/contacts', current.id]">Voir</a>
-    <a [routerLink]="['/contacts', current.id, 'edit']">Modifier</a>
-    <button type="button" (click)="deleteRequested.emit(current)">Supprimer</button>
+    <a [routerLink]="['/contacts', current.id]" class="btn">Voir</a>
+    <a [routerLink]="['/contacts', current.id, 'edit']" class="btn">Modifier</a>
+    <button type="button" class="btn-danger" (click)="deleteRequested.emit(current)">
+      Supprimer
+    </button>
   </div>
 </article>

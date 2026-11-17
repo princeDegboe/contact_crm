@@ -1,7 +1,7 @@
 <h2>{{ isEdit ? 'Modifier la catégorie' : 'Nouvelle catégorie' }}</h2>
 
 <!-- novalidate : on laisse Angular gérer les messages, pas le navigateur -->
-<form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+<form class="card form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
   <div class="field">
     <label for="name">Nom</label>
     <input id="name" type="text" formControlName="name" />
@@ -27,8 +27,8 @@
     <p class="error" role="alert">{{ message }}</p>
   }
 
-  <div class="actions">
-    <button type="submit">{{ isEdit ? 'Enregistrer' : 'Créer' }}</button>
-    <a routerLink="/categories">Annuler</a>
+  <div class="form-actions">
+    <a routerLink="/categories" class="btn">Annuler</a>
+    <button type="submit" class="btn-primary">{{ isEdit ? 'Enregistrer' : 'Créer' }}</button>
   </div>
 </form>

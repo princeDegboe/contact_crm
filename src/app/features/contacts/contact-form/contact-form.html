@@ -1,89 +1,93 @@
 <h2>{{ isEdit ? 'Modifier le contact' : 'Nouveau contact' }}</h2>
 
 @if (categories().length === 0) {
-  <p class="error" role="alert">
+  <p class="alert" role="alert">
     Aucune catégorie n'existe. <a routerLink="/categories/new">Créez-en une</a> avant d'ajouter un
     contact.
   </p>
 }
 
-<form [formGroup]="form" (ngSubmit)="submit()" novalidate>
-  <div class="field">
-    <label for="firstName">Prénom *</label>
-    <input id="firstName" type="text" formControlName="firstName" />
-    @if (form.controls.firstName.touched && form.controls.firstName.errors; as errors) {
-      <p class="error" role="alert">
-        @if (errors['required']) {
-          Le prénom est obligatoire.
-        } @else if (errors['minlength']) {
-          Le prénom doit contenir au moins 2 caractères.
-        }
-      </p>
-    }
-  </div>
-
-  <div class="field">
-    <label for="lastName">Nom *</label>
-    <input id="lastName" type="text" formControlName="lastName" />
-    @if (form.controls.lastName.touched && form.controls.lastName.errors; as errors) {
-      <p class="error" role="alert">
-        @if (errors['required']) {
-          Le nom est obligatoire.
-        } @else if (errors['minlength']) {
-          Le nom doit contenir au moins 2 caractères.
-        }
-      </p>
-    }
-  </div>
-
-  <div class="field">
-    <label for="email">Email *</label>
-    <input id="email" type="email" formControlName="email" />
-    @if (form.controls.email.touched && form.controls.email.errors; as errors) {
-      <p class="error" role="alert">
-        @if (errors['required']) {
-          L'email est obligatoire.
-        } @else if (errors['pattern']) {
-          Format d'email invalide (exemple : nom@domaine.com).
-        }
-      </p>
-    }
-  </div>
-
-  <div class="field">
-    <label for="phone">Téléphone</label>
-    <input id="phone" type="tel" formControlName="phone" />
-    @if (form.controls.phone.touched && form.controls.phone.errors?.['phone']) {
-      <p class="error" role="alert">Numéro invalide (8 à 15 chiffres, « + » autorisé au début).</p>
-    }
-  </div>
-
-  <div class="field">
-    <label for="company">Entreprise</label>
-    <input id="company" type="text" formControlName="company" />
-  </div>
-
-  <div class="field">
-    <label for="jobTitle">Poste</label>
-    <input id="jobTitle" type="text" formControlName="jobTitle" />
-  </div>
-
-  <div class="field">
-    <label for="categoryId">Catégorie *</label>
-    <select id="categoryId" formControlName="categoryId">
-      <option value="" disabled>Choisir une catégorie</option>
-      @for (category of categories(); track category.id) {
-        <option [value]="category.id">{{ category.name }}</option>
+<form class="card form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+  <div class="form-grid">
+    <div class="field">
+      <label for="firstName">Prénom *</label>
+      <input id="firstName" type="text" formControlName="firstName" />
+      @if (form.controls.firstName.touched && form.controls.firstName.errors; as errors) {
+        <p class="error" role="alert">
+          @if (errors['required']) {
+            Le prénom est obligatoire.
+          } @else if (errors['minlength']) {
+            Le prénom doit contenir au moins 2 caractères.
+          }
+        </p>
       }
-    </select>
-    @if (form.controls.categoryId.touched && form.controls.categoryId.errors) {
-      <p class="error" role="alert">Choisissez une catégorie.</p>
-    }
-  </div>
+    </div>
 
-  <div class="field">
-    <label for="notes">Notes</label>
-    <textarea id="notes" rows="4" formControlName="notes"></textarea>
+    <div class="field">
+      <label for="lastName">Nom *</label>
+      <input id="lastName" type="text" formControlName="lastName" />
+      @if (form.controls.lastName.touched && form.controls.lastName.errors; as errors) {
+        <p class="error" role="alert">
+          @if (errors['required']) {
+            Le nom est obligatoire.
+          } @else if (errors['minlength']) {
+            Le nom doit contenir au moins 2 caractères.
+          }
+        </p>
+      }
+    </div>
+
+    <div class="field">
+      <label for="email">Email *</label>
+      <input id="email" type="email" formControlName="email" />
+      @if (form.controls.email.touched && form.controls.email.errors; as errors) {
+        <p class="error" role="alert">
+          @if (errors['required']) {
+            L'email est obligatoire.
+          } @else if (errors['pattern']) {
+            Format d'email invalide (exemple : nom@domaine.com).
+          }
+        </p>
+      }
+    </div>
+
+    <div class="field">
+      <label for="phone">Téléphone</label>
+      <input id="phone" type="tel" formControlName="phone" />
+      @if (form.controls.phone.touched && form.controls.phone.errors?.['phone']) {
+        <p class="error" role="alert">
+          Numéro invalide (8 à 15 chiffres, « + » autorisé au début).
+        </p>
+      }
+    </div>
+
+    <div class="field">
+      <label for="company">Entreprise</label>
+      <input id="company" type="text" formControlName="company" />
+    </div>
+
+    <div class="field">
+      <label for="jobTitle">Poste</label>
+      <input id="jobTitle" type="text" formControlName="jobTitle" />
+    </div>
+
+    <div class="field field-full">
+      <label for="categoryId">Catégorie *</label>
+      <select id="categoryId" formControlName="categoryId">
+        <option value="" disabled>Choisir une catégorie</option>
+        @for (category of categories(); track category.id) {
+          <option [value]="category.id">{{ category.name }}</option>
+        }
+      </select>
+      @if (form.controls.categoryId.touched && form.controls.categoryId.errors) {
+        <p class="error" role="alert">Choisissez une catégorie.</p>
+      }
+    </div>
+
+    <div class="field field-full">
+      <label for="notes">Notes</label>
+      <textarea id="notes" rows="4" formControlName="notes"></textarea>
+    </div>
   </div>
 
   <div class="checkbox">
@@ -95,8 +99,8 @@
     <p class="error" role="alert">{{ message }}</p>
   }
 
-  <div class="actions">
-    <button type="submit">{{ isEdit ? 'Enregistrer' : 'Créer' }}</button>
-    <a routerLink="/contacts">Annuler</a>
+  <div class="form-actions">
+    <a routerLink="/contacts" class="btn">Annuler</a>
+    <button type="submit" class="btn-primary">{{ isEdit ? 'Enregistrer' : 'Créer' }}</button>
   </div>
 </form>

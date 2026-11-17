@@ -1,25 +1,6 @@
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  margin-bottom: 1rem;
-  max-width: 420px;
-}
-
-.checkbox {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.actions {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-}
-
-.error {
-  color: #dc2626;
-  margin: 0;
+/* Titre, alerte et formulaire centrés ensemble dans la zone de contenu */
+:host {
+  display: block;
+  max-width: 640px;
+  margin: 0 auto;
 }

@@ -1,1 +1,29 @@
-<p>favorites works!</p>
+<div class="page-header">
+  <h2>Favoris ({{ favorites().length }})</h2>
+  <a routerLink="/contacts" class="btn">Tous les contacts</a>
+</div>
+
+@if (errorMessage(); as message) {
+  <p class="alert" role="alert">{{ message }}</p>
+}
+
+@if (favorites().length > 0) {
+  <ul class="cards">
+    @for (contact of favorites(); track contact.id) {
+      <li>
+        <app-contact-card
+          [contact]="contact"
+          (favoriteToggled)="toggleFavorite($event)"
+          (deleteRequested)="remove($event)"
+        />
+      </li>
+    }
+  </ul>
+} @else {
+  <div class="card empty">
+    <p class="star" aria-hidden="true">☆</p>
+    <p>Aucun favori pour l'instant.</p>
+    <p class="muted">Cliquez sur l'étoile d'un contact pour l'ajouter ici.</p>
+    <a routerLink="/contacts" class="btn btn-primary">Voir les contacts</a>
+  </div>
+}
